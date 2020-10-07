@@ -13,7 +13,14 @@ body{
   justify-content: center;
   align-items: center;
 }
-.icon{
+.card{
+  background: #fff;
+  transition: all .1s ease;
+}
+.card:active{
+  background: #333;
+}
+
+.icons{
   font-size: 35px;
-  color: #fff;
 }
