@@ -17,10 +17,22 @@ const App = () => {
     /* state to declare the winner */
     const [winMessage, setWinMessage] = useState("");
 
+    const card = document.querySelectorAll(".card");
     const reloadGame = () => {
         setIsCross(false);
         setWinMessage("");
         itemArray.fill("empty", 0, 9);
+
+        card.forEach( el=>{
+            el.style.backgroundColor = "#fff"
+        })
+
+    };
+    const changeColor = (x, y, z) => {
+        card[x].style.backgroundColor = "#28a745";
+        card[y].style.backgroundColor = "#28a745";
+        card[z].style.backgroundColor = "#28a745";
+        console.log("Added success");
     };
 
     const checkIsWinner = () => {
@@ -31,49 +43,64 @@ const App = () => {
             itemArray[0] !== "empty"
         ) {
             setWinMessage(`${itemArray[0]} wins`);
+            changeColor(0, 1, 2);
+
+
         } else if (
             itemArray[3] === itemArray[4] &&
             itemArray[4] === itemArray[5] &&
             itemArray[3] !== "empty"
         ) {
             setWinMessage(`${itemArray[3]} wins`);
+            changeColor(3, 4, 5);
+
         } else if (
             itemArray[6] === itemArray[7] &&
             itemArray[7] === itemArray[8] &&
             itemArray[6] !== "empty"
         ) {
             setWinMessage(`${itemArray[6]} wins`);
+            changeColor(6, 7, 8);
+
         } else if (
             itemArray[0] === itemArray[3] &&
             itemArray[3] === itemArray[6] &&
             itemArray[0] !== "empty"
         ) {
             setWinMessage(`${itemArray[0]} wins`);
+            changeColor(0, 3, 6);
+
         } else if (
             itemArray[1] === itemArray[4] &&
             itemArray[4] === itemArray[7] &&
             itemArray[1] !== "empty"
         ) {
             setWinMessage(`${itemArray[1]} wins`);
+            changeColor(1, 4, 7);
+
         } else if (
             itemArray[2] === itemArray[5] &&
             itemArray[5] === itemArray[8] &&
             itemArray[2] !== "empty"
         ) {
             setWinMessage(`${itemArray[2]} wins`);
+            changeColor(2,5,8);
         } else if (
             itemArray[0] === itemArray[4] &&
             itemArray[4] === itemArray[8] &&
             itemArray[0] !== "empty"
         ) {
             setWinMessage(`${itemArray[0]} wins`);
+            changeColor(0,4,8);
         } else if (
             itemArray[2] === itemArray[4] &&
             itemArray[4] === itemArray[6] &&
             itemArray[2] !== "empty"
         ) {
             setWinMessage(`${itemArray[2]} wins`);
+            changeColor(2,4,6);
         }
+
     };
 
     const changeItem = (itemNumber) => {
@@ -111,10 +138,7 @@ const App = () => {
                     )}
                     <div className="grid">
                         {itemArray.map((item, index) => (
-                            <Card
-                                onClick={() => changeItem(index)}
-
-                            >
+                            <Card onClick={() => changeItem(index)}>
                                 <CardBody className="box">
                                     <Icon name={item} />
                                 </CardBody>
